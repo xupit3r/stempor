@@ -1,0 +1,14 @@
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+.env
+*.code-workspace
+
+npm-debug.log
+node_modules
+
+.DS_Store
