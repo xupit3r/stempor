@@ -4,12 +4,16 @@
   "description": "a Porter stemmer n'at",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [
     "stemmer",
     "porter"
   ],
   "author": "Joe D'Alessandro",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.4.0"
+  }
 }
