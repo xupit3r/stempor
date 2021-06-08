@@ -15,26 +15,9 @@ const M_IS_TWO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+[aeiou]+/;
 
 // conditional checks
 const STEM_ENDS_WITH_S = /.+s$/;
-const STEM_CONTAINS_VOWEL = /[b-df-hj-np-tv-z]+[aeiou]/;
+const STEM_CONTAINS_VOWEL = /^([b-df-hj-np-tv-z]+)?[aeiou]/;
 const ENDS_DOUBLE_CONSONANT = /[b-df-hj-np-tv-z]{2}$/;
 const ENDS_CVC = /[b-df-hj-np-tv-z][aeiou][b-df-hj-np-tvz]$/;
-
-// rules for step 1a of the algorithm
-const ONE_A_RULES = [
-  {
-    regex: /^(.+?)(sses)$/, 
-    suffix: 'ss'
-  }, {
-    regex: /^(.+?)(ies)$/,
-    suffix: 'i'
-  }, {
-    regex: /^(.+?)(ss)$/, 
-    suffix: 'ss'
-  }, {
-    regex: /^(.+?)(s)$/, 
-    suffix: ''
-  }
-];
 
 /**
  * Given a word, this will compute the word's measure
@@ -109,10 +92,53 @@ function endsWithCVC (word) {
   return word.match(ENDS_CVC);
 }
 
+// rules for step 1a of the algorithm
+const ONE_A_RULES = [
+  {
+    regex: /^(.+?)(sses)$/, 
+    suffix: 'ss'
+  }, {
+    regex: /^(.+?)(ies)$/,
+    suffix: 'i'
+  }, {
+    regex: /^(.+?)(ss)$/, 
+    suffix: 'ss'
+  }, {
+    regex: /^(.+?)(s)$/, 
+    suffix: ''
+  }
+];
+
+// rules for step 1b of the algorithm
+const ONE_B_RULES = [
+  {
+    cond (word) {
+      let stem = word.replace(this.regex, `$1${this.suffix}`);
+      return measure(stem) > 0;
+    },
+    regex: /^(.+?)(eed)$/,
+    suffix: 'ee'
+  }, {
+    cond (word) {
+      let stem = word.replace(this.regex, `$1${this.suffix}`);
+      return stemContainsVowel(stem);
+    },
+    regex: /^(.+?)(ed)$/,
+    suffix: ''
+  }, {
+    cond (word) {
+      let stem = word.replace(this.regex, `$1${this.suffix}`);
+      return stemContainsVowel(stem);
+    },
+    regex: /^(.+?)(ing)$/,
+    suffix: ''
+  }
+];
+
 /**
  * Perform step 1a of the algorithm.
  * 
- * @param {String} word 
+ * @param {String} word the word to stem
  * @returns the stem of the word after this step
  */
 exports.oneA = function oneA (word) {
@@ -131,6 +157,43 @@ exports.oneA = function oneA (word) {
   }
 
   return stem;
+}
+
+/**
+ * 
+ * @param {String} word the word to stem
+ * @returns an object containing the stem and the rule number that applied. 
+ * object will be of the form:
+ * 
+ *  {
+ *    stem: <the stem>,
+ *    rule: <the rule number that applied, 0 based>
+ *  }
+ */
+exports.oneB = function oneB (word) {
+  let result = {
+    stem: word,
+    rule: -1
+  };
+
+  if (word.match(ONE_B_RULES[0].regex)) {
+    if (ONE_B_RULES[0].cond(word)) {
+      result.stem = word.replace(ONE_B_RULES[0].regex, `$1${ONE_B_RULES[0].suffix}`);
+      result.rule = 0;
+    }
+  } else if (word.match(ONE_B_RULES[1].regex)) {
+    if (ONE_B_RULES[1].cond(word)) {
+      result.stem = word.replace(ONE_B_RULES[1].regex, `$1${ONE_B_RULES[1].suffix}`);
+      result.rule = 1;
+    }
+  } else if (word.match(ONE_B_RULES[2].regex)) {
+    if (ONE_B_RULES[2].cond(word)) {
+      result.stem = word.replace(ONE_B_RULES[2].regex, `$1${ONE_B_RULES[2].suffix}`);
+      result.rule = 2;
+    }
+  }
+
+  return result;
 }
 
 /**
