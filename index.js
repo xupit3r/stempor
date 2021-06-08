@@ -10,13 +10,13 @@
 
 // ugly, but effective..
 const M_NOT_ZERO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+/;
-const M_IS_ONE = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+[aeiou]+/;
-const M_IS_TWO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+[aeiou]+/;
+const M_IS_ONE = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?/;
+const M_IS_TWO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?/;
 
 // conditional checks
 const STEM_ENDS_WITH_S = /.+s$/;
 const STEM_CONTAINS_VOWEL = /^([b-df-hj-np-tv-z]+)?[aeiou]/;
-const ENDS_DOUBLE_CONSONANT = /[b-df-hj-np-tv-z]{2}$/;
+const ENDS_DOUBLE_CONSONANT = /[b-df-hjkmnp-rt-vx-y]{2}$/;
 const ENDS_CVC = /[b-df-hj-np-tv-z][aeiou][b-df-hj-np-tvz]$/;
 
 /**
@@ -135,6 +135,23 @@ const ONE_B_RULES = [
   }
 ];
 
+const ONE_B_RULES_2 = [
+  {
+    regex: /^(.+?)(at)$/,
+    suffix: 'ate'
+  }, {
+    regex: /^(.+?)(bl)$/,
+    suffix: 'ble'
+  }, {
+    regex: /^(.+?)(iz)$/,
+    suffix: 'ize'
+  }, {
+    cond (word) {
+
+    }
+  }
+]
+
 /**
  * Perform step 1a of the algorithm.
  * 
@@ -194,6 +211,32 @@ exports.oneB = function oneB (word) {
   }
 
   return result;
+}
+
+/**
+ * Applies subsequent 1b rules (operating on the stem from 1b)
+ * 
+ * @param {String} word the word to stem
+ * @returns the stem of the supplied word
+ */
+exports.oneBTwo = function oneBTwo (word) {
+  let stem;
+
+  if (word.match(ONE_B_RULES_2[0].regex)) {
+    stem = word.replace(ONE_B_RULES_2[0].regex, `$1${ONE_B_RULES_2[0].suffix}`);
+  } else if (word.match(ONE_B_RULES_2[1].regex)) {
+    stem = word.replace(ONE_B_RULES_2[1].regex, `$1${ONE_B_RULES_2[1].suffix}`);
+  } else if (word.match(ONE_B_RULES_2[2].regex)) {
+    stem = word.replace(ONE_B_RULES_2[2].regex, `$1${ONE_B_RULES_2[2].suffix}`);
+  } else if (endsWithDoubleConsonant(word)) {
+    stem = word.replace(/^(.+?)([b-df-hjkmnp-rt-vx-y])[b-df-hjkmnp-rt-vx-y]$/, '$1$2');
+  } else if (measure(word) === 1 && endsWithCVC(word)) {
+    stem = word + 'e';
+  } else {
+    stem = word;
+  }
+
+  return stem;
 }
 
 /**

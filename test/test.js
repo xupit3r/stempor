@@ -40,7 +40,7 @@ describe('step 1a', () => {
 });
 
 // tests step 1b of the algorithm
-describe('step 1b', () => {
+describe('step 1b - 1', () => {
   it('should build the correct stem for feed', () => {
     const word = 'feed';
     const stem = 'feed';
@@ -93,5 +93,88 @@ describe('step 1b', () => {
 
     expect(result.stem).to.equal(stem);
     expect(result.rule).to.equal(-1);
+  });
+});
+
+// tests step 1b of the algorithm
+describe('step 1b - 2', () => {
+  it('should build the correct stem for conflated', () => {
+    const word = 'conflated';
+    const stem = 'conflate';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for troubled', () => {
+    const word = 'troubled';
+    const stem = 'trouble';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for sized', () => {
+    const word = 'sized';
+    const stem = 'size';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for hopping', () => {
+    const word = 'hopping';
+    const stem = 'hop';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for tanning', () => {
+    const word = 'tanning';
+    const stem = 'tan';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for falling', () => {
+    const word = 'falling';
+    const stem = 'fall';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for hissing', () => {
+    const word = 'hissing';
+    const stem = 'hiss';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for fizzed', () => {
+    const word = 'fizzed';
+    const stem = 'fizz';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for failing', () => {
+    const word = 'failing';
+    const stem = 'fail';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for filing', () => {
+    const word = 'filing';
+    const stem = 'file';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
   });
 });
