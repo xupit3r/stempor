@@ -16,7 +16,7 @@ const M_IS_TWO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?/;
 // conditional checks
 const STEM_ENDS_WITH_S = /.+s$/;
 const STEM_CONTAINS_VOWEL = /^([b-df-hj-np-tv-z]+)?[aeiou]/;
-const ENDS_DOUBLE_CONSONANT = /[b-df-hjkmnp-rt-vx-y]{2}$/;
+const ENDS_DOUBLE_CONSONANT = /([b-df-hjkmnp-rt-vx-y])\1$/;
 const ENDS_CVC = /[b-df-hj-np-tv-z][aeiou][b-df-hj-np-tvz]$/;
 
 /**
@@ -135,6 +135,7 @@ const ONE_B_RULES = [
   }
 ];
 
+// some of the rules for 1b - 2 of the algorithm
 const ONE_B_RULES_2 = [
   {
     regex: /^(.+?)(at)$/,
@@ -145,12 +146,20 @@ const ONE_B_RULES_2 = [
   }, {
     regex: /^(.+?)(iz)$/,
     suffix: 'ize'
-  }, {
-    cond (word) {
-
-    }
   }
-]
+];
+
+// some of the rules for 1c of the algorithm
+const ONE_C_RULES = [
+  {
+    cond (word) {
+      let stem = word.replace(this.regex, '$1');
+      return stemContainsVowel(stem);
+    },
+    regex: /^(.+?)(y)$/,
+    suffix: 'i'
+  }
+];
 
 /**
  * Perform step 1a of the algorithm.
@@ -232,6 +241,28 @@ exports.oneBTwo = function oneBTwo (word) {
     stem = word.replace(/^(.+?)([b-df-hjkmnp-rt-vx-y])[b-df-hjkmnp-rt-vx-y]$/, '$1$2');
   } else if (measure(word) === 1 && endsWithCVC(word)) {
     stem = word + 'e';
+  } else {
+    stem = word;
+  }
+
+  return stem;
+}
+
+/**
+ * Applies the 1c rules (or, really, rule :)).
+ * 
+ * @param {String} word the word to stem
+ * @returns the stem of the supplied word
+ */
+exports.oneC = function oneC (word) {
+  let stem;
+
+  if (word.match(ONE_C_RULES[0].regex)) {
+    if (ONE_C_RULES[0].cond(word)) {
+      stem = word.replace(ONE_C_RULES[0].regex, `$1${ONE_C_RULES[0].suffix}`);
+    } else {
+      stem = word;
+    }
   } else {
     stem = word;
   }

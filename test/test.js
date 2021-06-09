@@ -178,3 +178,25 @@ describe('step 1b - 2', () => {
     expect(stempor.oneBTwo(result.stem)).to.equal(stem);
   });
 });
+
+describe('step 1c', () => {
+  it('should build the correct stem for happy', () => {
+    const word = 'happy';
+    const stem = 'happi';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneC(
+      stempor.oneBTwo(result.stem)
+    )).to.equal(stem);
+  });
+
+  it('should build the correct stem for sky', () => {
+    const word = 'sky';
+    const stem = 'sky';
+    const result = stempor.oneB(stempor.oneA(word));
+
+    expect(stempor.oneC(
+      stempor.oneBTwo(result.stem)
+    )).to.equal(stem);
+  });
+});
