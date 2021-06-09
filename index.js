@@ -113,22 +113,25 @@ const ONE_A_RULES = [
 const ONE_B_RULES = [
   {
     cond (word) {
-      let stem = word.replace(this.regex, `$1${this.suffix}`);
-      return measure(stem) > 0;
+      return measure(
+        word.replace(this.regex, '$1')
+      ) > 0;
     },
     regex: /^(.+?)(eed)$/,
     suffix: 'ee'
   }, {
     cond (word) {
-      let stem = word.replace(this.regex, `$1${this.suffix}`);
-      return stemContainsVowel(stem);
+      return stemContainsVowel(
+        word.replace(this.regex, '$1')
+      );
     },
     regex: /^(.+?)(ed)$/,
     suffix: ''
   }, {
     cond (word) {
-      let stem = word.replace(this.regex, `$1${this.suffix}`);
-      return stemContainsVowel(stem);
+      return stemContainsVowel(
+        word.replace(this.regex, '$1')
+      );
     },
     regex: /^(.+?)(ing)$/,
     suffix: ''
