@@ -363,13 +363,13 @@ exports.oneC = function oneC (word) {
 }
 
 /**
- * Applies the 
+ * Applies the step 2 rules
  * 
  * @param {String} word the word to stem
  * @returns the stem of the supplied word
  */
 exports.two = function two (word) {
-  let stem;
+  let stem = word;
   let idx = 0;
   let matched = false;
 
@@ -385,11 +385,7 @@ exports.two = function two (word) {
       }
     }
   }
-
-  if (!matched) {
-    stem = word;
-  }
-
+  
   return stem;
 }
 
