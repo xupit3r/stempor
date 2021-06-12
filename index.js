@@ -164,6 +164,90 @@ const ONE_C_RULES = [
   }
 ];
 
+// the rules for step 2 of the algorithm
+const TWO_RULES = [
+    {
+      regex: /^(.+?)(ational)$/,
+      suffix: 'ate'
+    },
+    {
+      regex: /^(.+?)(tional)$/,
+      suffix: 'tion'
+    },
+    {
+      regex: /^(.+?)(enci)$/,
+      suffix: 'ence'
+    },
+    {
+      regex: /^(.+?)(anci)$/,
+      suffix: 'ance'
+    },
+    {
+      regex: /^(.+?)(izer)$/,
+      suffix: 'ize'
+    },
+    {
+      regex: /^(.+?)(abli)$/,
+      suffix: 'able'
+    },
+    {
+      regex: /^(.+?)(alli)$/,
+      suffix: 'al'
+    },
+    {
+      regex: /^(.+?)(entli)$/,
+      suffix: 'ent'
+    },
+    {
+      regex: /^(.+?)(eli)$/,
+      suffix: 'e'
+    },
+    {
+      regex: /^(.+?)(ousli)$/,
+      suffix: 'ous'
+    },
+    {
+      regex: /^(.+?)(ization)$/,
+      suffix: 'ize'
+    },
+    {
+      regex: /^(.+?)(ation)$/,
+      suffix: 'ate'
+    },
+    {
+      regex: /^(.+?)(ator)$/,
+      suffix: 'ate'
+    },
+    {
+      regex: /^(.+?)(alism)$/,
+      suffix: 'al'
+    },
+    {
+      regex: /^(.+?)(iveness)$/,
+      suffix: 'ive'
+    },
+    {
+      regex: /^(.+?)(fulness)$/,
+      suffix: 'ful'
+    },
+    {
+      regex: /^(.+?)(ousness)$/,
+      suffix: 'ous'
+    },
+    {
+      regex: /^(.+?)(aliti)$/,
+      suffix: 'al'
+    },
+    {
+      regex: /^(.+?)(iviti)$/,
+      suffix: 'ive'
+    },
+    {
+      regex: /^(.+?)(biliti)$/,
+      suffix: 'ble'
+    },
+]
+
 /**
  * Perform step 1a of the algorithm.
  * 
@@ -231,8 +315,13 @@ exports.oneB = function oneB (word) {
  * @param {String} word the word to stem
  * @returns the stem of the supplied word
  */
-exports.oneBTwo = function oneBTwo (word) {
+exports.oneBTwo = function oneBTwo (result) {
+  let word = result.stem;
   let stem;
+
+  if (result. rule < 1) {
+    return word;
+  }
 
   if (word.match(ONE_B_RULES_2[0].regex)) {
     stem = word.replace(ONE_B_RULES_2[0].regex, `$1${ONE_B_RULES_2[0].suffix}`);
@@ -267,6 +356,37 @@ exports.oneC = function oneC (word) {
       stem = word;
     }
   } else {
+    stem = word;
+  }
+
+  return stem;
+}
+
+/**
+ * Applies the 
+ * 
+ * @param {String} word the word to stem
+ * @returns the stem of the supplied word
+ */
+exports.two = function two (word) {
+  let stem;
+  let idx = 0;
+  let matched = false;
+
+  while (!matched && idx < TWO_RULES.length) {
+    let { regex, suffix } = TWO_RULES[idx++];
+
+    if (word.match(regex)) {
+      let stripped = word.replace(regex, `$1`);
+
+      if (measure(stripped) > 0) {
+        stem = word.replace(regex, `$1${suffix}`);
+        matched = true;
+      }
+    }
+  }
+
+  if (!matched) {
     stem = word;
   }
 

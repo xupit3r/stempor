@@ -103,7 +103,7 @@ describe('step 1b - 2', () => {
     const stem = 'conflate';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for troubled', () => {
@@ -111,7 +111,7 @@ describe('step 1b - 2', () => {
     const stem = 'trouble';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for sized', () => {
@@ -119,7 +119,7 @@ describe('step 1b - 2', () => {
     const stem = 'size';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for hopping', () => {
@@ -127,7 +127,7 @@ describe('step 1b - 2', () => {
     const stem = 'hop';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for tanning', () => {
@@ -135,7 +135,7 @@ describe('step 1b - 2', () => {
     const stem = 'tan';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for falling', () => {
@@ -143,7 +143,7 @@ describe('step 1b - 2', () => {
     const stem = 'fall';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for hissing', () => {
@@ -151,7 +151,7 @@ describe('step 1b - 2', () => {
     const stem = 'hiss';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for fizzed', () => {
@@ -159,7 +159,7 @@ describe('step 1b - 2', () => {
     const stem = 'fizz';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for failing', () => {
@@ -167,7 +167,7 @@ describe('step 1b - 2', () => {
     const stem = 'fail';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 
   it('should build the correct stem for filing', () => {
@@ -175,7 +175,7 @@ describe('step 1b - 2', () => {
     const stem = 'file';
     const result = stempor.oneB(stempor.oneA(word));
 
-    expect(stempor.oneBTwo(result.stem)).to.equal(stem);
+    expect(stempor.oneBTwo(result)).to.equal(stem);
   });
 });
 
@@ -186,17 +186,250 @@ describe('step 1c', () => {
     const result = stempor.oneB(stempor.oneA(word));
 
     expect(stempor.oneC(
-      stempor.oneBTwo(result.stem)
+      stempor.oneBTwo(result)
     )).to.equal(stem);
   });
 
-  it('should build the correct stem for sky', () => {
-    const word = 'sky';
-    const stem = 'sky';
+  it('should build the correct stem for happy', () => {
+    const word = 'happy';
+    const stem = 'happi';
     const result = stempor.oneB(stempor.oneA(word));
 
     expect(stempor.oneC(
-      stempor.oneBTwo(result.stem)
+      stempor.oneBTwo(result)
     )).to.equal(stem);
+  });
+});
+
+describe('step 2', () => {
+  it('should build the correct stem for relational', () => {
+    const word = 'relational';
+    const stem = 'relate';
+    
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for conditional', () => {
+    const word = 'conditional';
+    const stem = 'condition';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for rational', () => {
+    const word = 'rational';
+    const stem = 'rational';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for valenci', () => {
+    const word = 'valenci';
+    const stem = 'valence';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for hesitenci', () => {
+    const word = 'hesitanci';
+    const stem = 'hesitance';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for digitizer', () => {
+    const word = 'digitizer';
+    const stem = 'digitize';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for digitizer', () => {
+    const word = 'comfortabli';
+    const stem = 'comfortable';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for radicali', () => {
+    const word = 'radicalli';
+    const stem = 'radical';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for differentli', () => {
+    const word = 'differentli';
+    const stem = 'different';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for vileli', () => {
+    const word = 'vileli';
+    const stem = 'vile';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for analogousli', () => {
+    const word = 'analogousli';
+    const stem = 'analogous';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for vietnamization', () => {
+    const word = 'vietnamization';
+    const stem = 'vietnamize';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for predication', () => {
+    const word = 'predication';
+    const stem = 'predicate';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for operator', () => {
+    const word = 'operator';
+    const stem = 'operate';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for feudalism', () => {
+    const word = 'feudalism';
+    const stem = 'feudal';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for decisiveness', () => {
+    const word = 'decisiveness';
+    const stem = 'decisive';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for hopefulness', () => {
+    const word = 'hopefulness';
+    const stem = 'hopeful';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for callousness', () => {
+    const word = 'callousness';
+    const stem = 'callous';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for formaliti', () => {
+    const word = 'formaliti';
+    const stem = 'formal';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for sensitiviti', () => {
+    const word = 'sensitiviti';
+    const stem = 'sensitive';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
+  });
+
+  it('should build the correct stem for sensibiliti', () => {
+    const word = 'sensibiliti';
+    const stem = 'sensible';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.two(tempStem)).to.equal(stem);
   });
 });
