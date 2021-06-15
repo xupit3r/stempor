@@ -512,3 +512,214 @@ describe('step 3', () => {
     expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
   });
 });
+
+describe('step 3', () => {
+  it('should build the correct stem for revival', () => {
+    const word = 'revival';
+    const stem = 'reviv';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for allowance', () => {
+    const word = 'allowance';
+    const stem = 'allow';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for inference', () => {
+    const word = 'inference';
+    const stem = 'infer';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for airliner', () => {
+    const word = 'airliner';
+    const stem = 'airlin';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for gyroscopic', () => {
+    const word = 'gyroscopic';
+    const stem = 'gyroscop';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for adjustable', () => {
+    const word = 'adjustable';
+    const stem = 'adjust';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for defensible', () => {
+    const word = 'defensible';
+    const stem = 'defens';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for irritant', () => {
+    const word = 'irritant';
+    const stem = 'irrit';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for replacement', () => {
+    const word = 'replacement';
+    const stem = 'replac';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for adjustment', () => {
+    const word = 'adjustment';
+    const stem = 'adjust';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for dependent', () => {
+    const word = 'dependent';
+    const stem = 'depend';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for adoption', () => {
+    const word = 'adoption';
+    const stem = 'adopt';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for homologou', () => {
+    const word = 'homologou';
+    const stem = 'homolog';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for communism', () => {
+    const word = 'communism';
+    const stem = 'commun';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for activate', () => {
+    const word = 'activate';
+    const stem = 'activ';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for angulariti', () => {
+    const word = 'angulariti';
+    const stem = 'angular';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for homologous', () => {
+    const word = 'homologous';
+    const stem = 'homolog';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for effective', () => {
+    const word = 'effective';
+    const stem = 'effect';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+
+  it('should build the correct stem for bowdlerize', () => {
+    const word = 'bowdlerize';
+    const stem = 'bowdler';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+});

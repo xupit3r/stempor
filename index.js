@@ -14,7 +14,6 @@ const M_IS_ONE = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?/;
 const M_IS_TWO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?/;
 
 // conditional checks
-const STEM_ENDS_WITH_S = /.+s$/;
 const STEM_CONTAINS_VOWEL = /^([b-df-hj-np-tv-z]+)?[aeiou]/;
 const ENDS_DOUBLE_CONSONANT = /([b-df-hjkmnp-rt-vx-y])\1$/;
 const ENDS_CVC = /[b-df-hj-np-tv-z][aeiou][b-df-hj-np-tvz]$/;
@@ -39,16 +38,11 @@ function measure (word) {
 /**
  * Checks if a particular
  * @param {String} word the word to match against
- * @param {String | RegExp} suffix the suffix to check for (can be a 
- * string or a regular expression)
+ * @param {String} letter the letter to check if the word ends
  * @returns 
  */
-function endsWith (word, suffix) {
-  if (suffix instanceof RegExp) {
-    return word.match(suffix);
-  }
-
-  return word.match(`${suffix}`);
+function endsWith (word, letter) {
+  return word.match(`${letter}+$`);
 }
 
 /**
@@ -59,16 +53,6 @@ function endsWith (word, suffix) {
  */
 function stemContainsVowel (word) {
   return word.match(STEM_CONTAINS_VOWEL);
-}
-
-/**
- * Checks if the word's stem ends with S
- * 
- * @param {String} word the word to check
- * @returns 
- */
-function stemEndsWithS (word) {
-  return word.match(STEM_ENDS_WITH_S);
 }
 
 /**
@@ -273,6 +257,81 @@ const THREE_RULES = [
   }
 ];
 
+const FOUR_RULES = [
+  {
+    regex: /^(.+?)(al)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ance)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ence)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(er)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ic)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(able)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ible)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ant)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ement)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ment)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ent)$/,
+    suffix: ''
+  }, {
+    cond: stem => {
+      return (
+        endsWith(stem, 's') ||
+        endsWith(stem, 't')
+      );
+    },
+    regex: /^(.+?)(ion)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ou)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ism)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ate)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(iti)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ous)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ive)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ize)$/,
+    suffix: ''
+  }
+].map(rule => {
+  if (typeof rule.cond === 'function') {
+    return rule;
+  }
+
+  rule.cond = () => true;
+
+  return rule;
+});
+
 /**
  * Perform step 1a of the algorithm.
  * 
@@ -432,6 +491,27 @@ exports.three = function three (word) {
       let stripped = word.replace(regex, `$1`);
 
       if (measure(stripped) > 0) {
+        stem = word.replace(regex, `$1${suffix}`);
+        matched = true;
+      }
+    }
+  }
+
+  return stem;
+}
+
+exports.four = function four (word) {
+  let stem = word;
+  let idx = 0;
+  let matched = false;
+
+  while (!matched && idx < FOUR_RULES.length) {
+    let { regex, suffix, cond } = FOUR_RULES[idx++];
+
+    if (word.match(regex)) {
+      let stripped = word.replace(regex, `$1`);
+
+      if (measure(stripped) === 1 && cond(stripped)) {
         stem = word.replace(regex, `$1${suffix}`);
         matched = true;
       }
