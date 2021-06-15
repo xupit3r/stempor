@@ -433,3 +433,82 @@ describe('step 2', () => {
     expect(stempor.two(tempStem)).to.equal(stem);
   });
 });
+
+describe('step 3', () => {
+  it('should build the correct stem for triplicate', () => {
+    const word = 'triplicate';
+    const stem = 'triplic';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
+  });
+
+  it('should build the correct stem for formative', () => {
+    const word = 'formative';
+    const stem = 'form';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
+  });
+
+  it('should build the correct stem for formalize', () => {
+    const word = 'formalize';
+    const stem = 'formal';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
+  });
+
+  it('should build the correct stem for electriciti', () => {
+    const word = 'electriciti';
+    const stem = 'electric';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
+  });
+
+  it('should build the correct stem for electrical', () => {
+    const word = 'electrical';
+    const stem = 'electric';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
+  });
+
+  it('should build the correct stem for hopeful', () => {
+    const word = 'hopeful';
+    const stem = 'hope';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
+  });
+
+  it('should build the correct stem for goodness', () => {
+    const word = 'goodness';
+    const stem = 'good';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.three(stempor.two(tempStem))).to.equal(stem);
+  });
+});

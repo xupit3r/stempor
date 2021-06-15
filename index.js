@@ -246,7 +246,32 @@ const TWO_RULES = [
       regex: /^(.+?)(biliti)$/,
       suffix: 'ble'
     },
-]
+];
+
+const THREE_RULES = [
+  {
+    regex:  /^(.+?)(icate)$/,
+    suffix: 'ic'
+  }, {
+    regex: /^(.+?)(ative)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(alize)$/,
+    suffix: 'al'
+  }, {
+    regex: /^(.+?)(iciti)$/,
+    suffix: 'ic'
+  }, {
+    regex: /^(.+?)(ical)$/,
+    suffix: 'ic'
+  }, {
+    regex: /^(.+?)(ful)$/,
+    suffix: ''
+  }, {
+    regex: /^(.+?)(ness)$/,
+    suffix: ''
+  }
+];
 
 /**
  * Perform step 1a of the algorithm.
@@ -386,6 +411,33 @@ exports.two = function two (word) {
     }
   }
   
+  return stem;
+}
+
+/**
+ * Applies the step 3 rules
+ * 
+ * @param {String} word the word to stem
+ * @returns the stem of the word supplied
+ */
+exports.three = function three (word) {
+  let stem = word;
+  let idx = 0;
+  let matched = false;
+
+  while (!matched && idx < THREE_RULES.length) {
+    let { regex, suffix } = THREE_RULES[idx++];
+
+    if (word.match(regex)) {
+      let stripped = word.replace(regex, `$1`);
+
+      if (measure(stripped) > 0) {
+        stem = word.replace(regex, `$1${suffix}`);
+        matched = true;
+      }
+    }
+  }
+
   return stem;
 }
 
