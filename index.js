@@ -500,6 +500,12 @@ exports.three = function three (word) {
   return stem;
 }
 
+/**
+ * Applies the step 4 rules
+ * 
+ * @param {String} word the word to stem
+ * @returns the stem of the word supplied
+ */
 exports.four = function four (word) {
   let stem = word;
   let idx = 0;
