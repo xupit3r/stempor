@@ -332,7 +332,7 @@ const FOUR_RULES = [
   return rule;
 });
 
-const FIVE_A_RULES = [
+const FIVE_RULES = [
   {
     cond: stem => {
       return measure(stem) > 1;
@@ -552,13 +552,13 @@ exports.four = function four (word) {
  * @param {String} word the word to stem
  * @return the stem of the word supplied
  */
-exports.fiveA = function (word) {
+exports.five = function (word) {
   let stem = word;
   let idx = 0;
   let matched = false;
 
-  while (!matched && idx < FIVE_A_RULES.length) {
-    let { regex, suffix, cond } = FIVE_A_RULES[idx++];
+  while (!matched && idx < FIVE_RULES.length) {
+    let { regex, suffix, cond } = FIVE_RULES[idx++];
 
     if (word.match(regex)) {
       let stripped = word.replace(regex, `$1`);
@@ -567,6 +567,12 @@ exports.fiveA = function (word) {
         stem = word.replace(regex, `$1${suffix}`);
         matched = true;
       }
+    }
+  }
+
+  if (!matched) {
+    if (measure(word) > 1 && endsWith(word, 'll')) {
+      stem = word.replace(/^(.+?l)l$/, '$1');
     }
   }
 

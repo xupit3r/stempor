@@ -724,7 +724,7 @@ describe('step 4', () => {
   });
 });
 
-describe('step 5a', () => {
+describe('step 5', () => {
   it('should build the correct stem for probate', () => {
     const word = 'probate';
     const stem = 'probat';
@@ -732,7 +732,7 @@ describe('step 5a', () => {
     const result = stempor.oneB(stempor.oneA(word));
     const tempStem = stempor.oneC(stempor.oneBTwo(result));
 
-    expect(stempor.fiveA(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
+    expect(stempor.five(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
   });
 
   it('should build the correct stem for rate', () => {
@@ -743,7 +743,7 @@ describe('step 5a', () => {
     const tempStem = stempor.oneC(stempor.oneBTwo(result));
 
 
-    expect(stempor.fiveA(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
+    expect(stempor.five(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
   });
 
   it('should build the correct stem for cease', () => {
@@ -753,6 +753,26 @@ describe('step 5a', () => {
     const result = stempor.oneB(stempor.oneA(word));
     const tempStem = stempor.oneC(stempor.oneBTwo(result));
 
-    expect(stempor.fiveA(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
+    expect(stempor.five(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
+  });
+
+  it('should build the correct stem for controll', () => {
+    const word = 'controll';
+    const stem = 'control';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+    expect(stempor.five(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
+  });
+
+  it('should build the correct stem for roll', () => {
+    const word = 'roll';
+    const stem = 'roll';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+    expect(stempor.five(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
   });
 });
