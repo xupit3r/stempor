@@ -513,7 +513,7 @@ describe('step 3', () => {
   });
 });
 
-describe('step 3', () => {
+describe('step 4', () => {
   it('should build the correct stem for revival', () => {
     const word = 'revival';
     const stem = 'reviv';
@@ -721,5 +721,38 @@ describe('step 3', () => {
 
 
     expect(stempor.four(stempor.three(stempor.two(tempStem)))).to.equal(stem);
+  });
+});
+
+describe('step 5a', () => {
+  it('should build the correct stem for probate', () => {
+    const word = 'probate';
+    const stem = 'probat';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+    expect(stempor.fiveA(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
+  });
+
+  it('should build the correct stem for rate', () => {
+    const word = 'rate';
+    const stem = 'rate';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+
+    expect(stempor.fiveA(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
+  });
+
+  it('should build the correct stem for cease', () => {
+    const word = 'cease';
+    const stem = 'ceas';
+
+    const result = stempor.oneB(stempor.oneA(word));
+    const tempStem = stempor.oneC(stempor.oneBTwo(result));
+
+    expect(stempor.fiveA(stempor.four(stempor.three(stempor.two(tempStem))))).to.equal(stem);
   });
 });

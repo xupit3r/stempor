@@ -10,7 +10,7 @@
 
 // ugly, but effective..
 const M_NOT_ZERO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+/;
-const M_IS_ONE = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?/;
+const M_IS_ONE = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?$/;
 const M_IS_TWO = /^([b-df-hj-np-tv-z]+)?[aeiou]+[b-df-hj-np-tv-z]+([aeiou]+)?/;
 
 // conditional checks
@@ -332,6 +332,25 @@ const FOUR_RULES = [
   return rule;
 });
 
+const FIVE_A_RULES = [
+  {
+    cond: stem => {
+      return measure(stem) > 1;
+    },
+    regex: /^(.+?)(e)$/,
+    suffix: ''
+  }, {
+    cond: stem => {
+      return (
+        measure(stem) === 1 && 
+        !endsWithCVC(stem)
+      );
+    },
+    regex: /^(.+?)(e)$/,
+    suffix: ''
+  }
+];
+
 /**
  * Perform step 1a of the algorithm.
  * 
@@ -516,8 +535,35 @@ exports.four = function four (word) {
 
     if (word.match(regex)) {
       let stripped = word.replace(regex, `$1`);
+      
+      if (measure(stripped) > 1 && cond(stripped)) {
+        stem = word.replace(regex, `$1${suffix}`);
+        matched = true;
+      }
+    }
+  }
 
-      if (measure(stripped) === 1 && cond(stripped)) {
+  return stem;
+}
+
+/**
+ * Applies the step 5 rules
+ * 
+ * @param {String} word the word to stem
+ * @return the stem of the word supplied
+ */
+exports.fiveA = function (word) {
+  let stem = word;
+  let idx = 0;
+  let matched = false;
+
+  while (!matched && idx < FIVE_A_RULES.length) {
+    let { regex, suffix, cond } = FIVE_A_RULES[idx++];
+
+    if (word.match(regex)) {
+      let stripped = word.replace(regex, `$1`);
+
+      if (cond(stripped)) {
         stem = word.replace(regex, `$1${suffix}`);
         matched = true;
       }
